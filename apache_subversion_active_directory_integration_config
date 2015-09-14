@@ -1,0 +1,17 @@
+# vim /etc/httpd/conf.d/subversion.conf and belog config parameters with required changes.
+
+<(Location /svn)>
+    DAV svn
+    SVNParentPath /svn
+    AuthBasicProvider ldap
+    AuthType Basic
+    AuthzLDAPAuthoritative off
+    AuthName "My Subversion Server"
+    AuthLDAPURL "ldap://server.example.com:389/DC=example,DC=com?sAMAccountName?sub?(objectClass=*)"
+    AuthLDAPBindDN "ldapbind@example.com"
+    AuthLDAPBindPassword "password"
+    require valid-user
+    Order allow,deny
+    AllowOverride None
+    Allow from all
+</Location>
